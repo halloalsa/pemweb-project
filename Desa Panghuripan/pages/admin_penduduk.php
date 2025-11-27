@@ -3,18 +3,12 @@ require "../components/session_protected.php";
 require "../components/components.php";
 require "../config/koneksi.php";
 
-// ambil username admin yang login
 $username = isset($_SESSION['username_admin']) ? $_SESSION['username_admin'] : 'Admin';
 
-// ambil keyword pencarian (jika ada)
 $keyword = isset($_GET['cari']) ? trim($_GET['cari']) : "";
 
-// query data penduduk
 if ($keyword !== "") {
-    // cari berdasarkan id atau nama
-    $sql = "SELECT * FROM penduduk 
-            WHERE id = '$keyword' 
-               OR nama LIKE '%$keyword%'
+    $sql = "SELECT * FROM pendudukWHERE id = '$keyword' OR nama LIKE '%$keyword%'
             ORDER BY id ASC";
 } else {
     $sql = "SELECT * FROM penduduk ORDER BY id ASC";
@@ -28,8 +22,8 @@ $result = mysqli_query($koneksi, $sql);
 
 <head>
     <?= head('Data dan Statistik') ?>
-    <link rel="stylesheet" href="../style/dashboardAdmin.css"><!-- untuk navbar -->
-    <link rel="stylesheet" href="../style/adm_penduduk.css"><!-- khusus halaman ini -->
+    <link rel="stylesheet" href="../style/dashboardAdmin.css">
+    <link rel="stylesheet" href="../style/adm_penduduk.css">
 </head>
 
 <body>
@@ -48,7 +42,6 @@ $result = mysqli_query($koneksi, $sql);
         </div>
     </nav>
 
-    <!-- BACKGROUND GRADIENT + KONTEN -->
     <div class="penduduk-bg">
         <div class="penduduk-header">
             <div>
@@ -70,18 +63,13 @@ $result = mysqli_query($koneksi, $sql);
 
                 <!-- FORM SEARCH -->
                 <form method="get" class="penduduk-search-form">
-                    <input
-                        type="text"
-                        name="cari"
-                        class="penduduk-search-input"
-                        placeholder="Cari berdasarkan ID atau Nama..."
-                        value="<?= htmlspecialchars($keyword) ?>"
+                    <input type="text" name="cari" class="penduduk-search-input"
+                           placeholder="Cari berdasarkan ID atau Nama"  value="<?= htmlspecialchars($keyword) ?>"
                     >
                     <button type="submit" class="penduduk-search-btn">Cari</button>
                 </form>
             </div>
 
-            <!-- TABEL -->
             <div class="penduduk-table-wrapper">
                 <table class="penduduk-table">
                     <thead>
@@ -95,6 +83,7 @@ $result = mysqli_query($koneksi, $sql);
                             <th>Aksi</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <?php if (mysqli_num_rows($result) > 0): ?>
                             <?php while ($row = mysqli_fetch_assoc($result)): ?>
@@ -136,6 +125,6 @@ $result = mysqli_query($koneksi, $sql);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous"> </script>
 </body>
 </html>
