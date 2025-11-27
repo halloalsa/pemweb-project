@@ -3,18 +3,20 @@ require "../components/session_protected.php";
 require "../components/components.php";
 require "../config/koneksi.php";
 
-$username = isset($_SESSION['username_admin']) ? $_SESSION['username_admin'] : 'Admin';
+$username = $_SESSION['username_admin'] ?? 'Admin';
 
-$keyword = isset($_GET['cari']) ? trim($_GET['cari']) : "";
-
-if ($keyword !== "") {
-    $sql = "SELECT * FROM pendudukWHERE id = '$keyword' OR nama LIKE '%$keyword%'
-            ORDER BY id ASC";
-} else {
-    $sql = "SELECT * FROM penduduk ORDER BY id ASC";
+$keyword = "";
+if (isset($_GET['cari'])) {
+    $keyword = trim($_GET['cari']);
 }
 
-$result = mysqli_query($koneksi, $sql);
+$sql = "SELECT * FROM penduduk";
+if ($keyword !== "") {
+    $sql .= " WHERE id = '$keyword' OR nama LIKE '%$keyword%'";
+}
+$sql .= " ORDER BY id ASC";
+
+$penduduk = mysqli_query($koneksi, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +29,8 @@ $result = mysqli_query($koneksi, $sql);
 </head>
 
 <body>
-    <nav class="navbar-admin">
+    <!-- NAVBAR -->
+    <nav class="navbar-admin navbar-admin-shadow">
         <div class="logo-area">
             <img src="../assets/admin/logo.svg" alt="Logo Desa">
             <div class="brand">
@@ -43,68 +46,75 @@ $result = mysqli_query($koneksi, $sql);
     </nav>
 
     <div class="penduduk-bg">
-        <div class="penduduk-header">
-            <div>
-                <h1 class="penduduk-page-title">Data dan Statistik</h1>
+        <div class="penduduk-wrapper">
+            <div class="penduduk-header">
+                <h1 class="penduduk-page-title">DATA DAN STATISTIK</h1>
                 <p class="penduduk-page-subtitle">
                     Lihat dan kelola semua data penduduk Desa Panghuripan.
                 </p>
             </div>
 
-            <a href="tambah_penduduk.php" class="btn-tambah-penduduk">
-                Tambah Penduduk
-            </a>
-        </div>
-
-        <!-- KARTU TABEL PENDUDUK -->
-        <div class="penduduk-card">
-            <div class="penduduk-card-top">
-                <h2 class="penduduk-card-title">Daftar Penduduk</h2>
-
-                <!-- FORM SEARCH -->
-                <form method="get" class="penduduk-search-form">
-                    <input type="text" name="cari" class="penduduk-search-input"
-                           placeholder="Cari berdasarkan ID atau Nama"  value="<?= htmlspecialchars($keyword) ?>"
-                    >
-                    <button type="submit" class="penduduk-search-btn">Cari</button>
-                </form>
+            <div class="penduduk-top-actions">
+                <a href="tambah_penduduk.php" class="btn btn-tambah-penduduk">
+                    Tambah Penduduk
+                </a>
             </div>
 
-            <div class="penduduk-table-wrapper">
-                <table class="penduduk-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama</th>
-                            <th>KK / Alamat</th>
-                            <th>Usia</th>
-                            <th>JK</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
+            <div class="penduduk-card">
+                <div class="penduduk-card-header">
+                    <h2 class="penduduk-card-title">Daftar Penduduk</h2>
 
-                    <tbody>
-                        <?php if (mysqli_num_rows($result) > 0): ?>
-                            <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                                <tr>
+                    <form method="GET" class="search-form">
+                        <input
+                            type="text"
+                            name="cari"
+                            class="search-input"
+                            placeholder="Cari berdasarkan ID atau Nama..."
+                            value="<?= htmlspecialchars($keyword) ?>"
+                        >
+                        <button type="submit" class="search-btn">Cari</button>
+                    </form>
+                </div>
+
+                <div class="penduduk-table-wrapper">
+                    <table class="penduduk-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>KK / Alamat</th>
+                                <th>Usia</th>
+                                <th>JK</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php if (mysqli_num_rows($penduduk) > 0): ?>
+                            <?php $i = 0; ?>
+                            <?php while ($row = mysqli_fetch_assoc($penduduk)): ?>
+                                <?php $i++; ?>
+                                <tr class="<?= $i % 2 == 0 ? 'row-hijau' : 'row-krem' ?>">
                                     <td><?= $row['id'] ?></td>
                                     <td><?= htmlspecialchars($row['nama']) ?></td>
                                     <td>
-                                        <div class="kk-text"><?= htmlspecialchars($row['no_kk']) ?></div>
-                                        <div class="alamat-text"><?= htmlspecialchars($row['jalan']) ?></div>
+                                        <strong><?= htmlspecialchars($row['no_kk']) ?></strong><br>
+                                        <?= htmlspecialchars($row['jalan']) ?>
                                     </td>
                                     <td><?= $row['usia'] ?></td>
-                                    <td><?= $row['jenis_kelamin'] ?></td>
+                                    <td><?= htmlspecialchars($row['jenis_kelamin']) ?></td>
                                     <td>
                                         <?= htmlspecialchars($row['status_pernikahan']) ?>
-                                        | <?= htmlspecialchars($row['status_hidup']) ?>
+                                        |
+                                        <?= htmlspecialchars($row['status_hidup']) ?>
                                     </td>
-                                    <td>
-                                        <a href="edit_penduduk.php?id=<?= $row['id'] ?>" class="btn-edit">Edit</a>
-                                        <a href="hapus_penduduk.php?id=<?= $row['id'] ?>"
-                                           class="btn-delete"
-                                           onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                    <td class="aksi-col">
+                                        <a href="edit_penduduk.php?id=<?= $row['id'] ?>" class="btn-aksi btn-edit">Edit</a>
+                                        <a
+                                            href="../logic/hapus_data.php?id=<?= $row['id'] ?>"
+                                            class="btn-aksi btn-hapus"
+                                            onclick="return confirm('Yakin ingin menghapus data ini?');"
+                                        >
                                             Hapus
                                         </a>
                                     </td>
@@ -112,19 +122,18 @@ $result = mysqli_query($koneksi, $sql);
                             <?php endwhile; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="7" class="text-center-empty">
-                                    Data tidak ditemukan. Coba kata kunci lain.
+                                <td colspan="7" class="text-center">
+                                    Data tidak ditemukan.
                                 </td>
                             </tr>
                         <?php endif; ?>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-            crossorigin="anonymous"> </script>
 </body>
 </html>
