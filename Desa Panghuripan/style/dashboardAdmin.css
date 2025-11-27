@@ -1,0 +1,148 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background-color: #EBE9DD;
+}
+
+.navbar-admin {
+    height: 93px;
+    background-color: #003631;
+    box-shadow: 0 0 15px 6px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    color: #fff;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-area img {
+    width: 41px;
+    height: 41px;
+}
+
+.brand h3 {
+    font-family: "Marcellus SC", serif;
+    font-size: 20px;
+    margin: 0;
+    line-height: 1;
+}
+
+.brand p {
+    font-size: 11px;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.admin-info {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.logout-btn {
+    background-color: #EFB34A;
+    border-radius: 24.5px;
+    padding: 8px 32px;
+    border: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.dashboard-bg {
+    min-height: calc(100vh - 93px);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 54, 49, 0.75) 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 198, 97, 0.65) 100%
+        ),
+        url("../assets/admin/bg dashboard.png");
+    background-size: cover;
+    background-position: center;
+
+    padding-top: 0px; 
+    padding-bottom: 60px;
+}
+
+.dashboard-bg .container {
+    max-width: 1200px;
+}
+
+.dashboard-title {
+    font-family: "Marcellus SC", serif;
+    font-size: 60px;
+    color: #FFFFFF;
+    margin: 0 0 10px 0; 
+}
+
+.dashboard-subtitle {
+    font-size: 20px;
+    color: #FEF0B3;
+    max-width: 1150px;
+    margin: 0 0 40px 0;
+}
+
+.stat-card {
+    background: linear-gradient(160deg, #EBE9DD 5%, rgba(156, 200, 141, 0.7) 92%);
+    border-radius: 25px;
+    padding: 26px 30px;
+    box-shadow: 0 5px 15px 5px rgba(0, 0, 0, 0.25);
+}
+
+.stat-label {
+    font-size: 24px;
+    font-weight: 600;
+    color: #256128;
+    margin-bottom: 14px;
+}
+
+.stat-value {
+    font-size: 40px;
+    font-weight: 700;
+    color: #003631;
+    margin: 0;
+}
+
+.menu-card {
+    background: linear-gradient(115deg, #EBE9DD 16%, rgba(255, 195, 91, 0.7) 92%);
+    border-radius: 30px;
+    padding: 28px 32px 30px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.35);
+}
+
+.menu-card h3 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #256128;
+    margin-bottom: 12px;
+}
+
+.menu-card p {
+    font-size: 20px;
+    font-weight: 500;
+    color: #367B39;
+    margin-bottom: 26px;
+}
+
+.menu-btn {
+    display: inline-block;
+    background-color: #256128;
+    border-radius: 30px;
+    padding: 12px 100px;
+    color: #FFFFFF;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+}

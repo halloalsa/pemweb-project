@@ -1,0 +1,92 @@
+/*Navbar--------------------------------------------*/
+
+nav{
+    height: 93px;
+    background-color: #003631;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    box-shadow: 0px 0px 15px 6px #00000040;
+}
+
+.logo{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img{
+    width: 41px;
+    height: 41px;
+}
+
+.logo p{
+    margin: 0;
+    font-family: "Plus Jakarta Sans";
+    font-weight: 500;
+    font-size: 11px;
+    color: white;
+}
+
+.logo h3{
+    margin: 0;
+    font-family: "Marcellus SC";
+    font-size: 20px;
+    color: white;
+    margin-top: 5px;
+}
+
+.menuNav{
+    display: flex;
+}
+
+.menuNav{
+    font-family: Plus Jakarta Sans;
+    font-weight: 500;
+    font-size: 20px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.pilihMenu{
+    width: 82px;
+    border-radius: 10px;
+    border: 2px solid #e9b96a;
+}
+
+.menu{
+    display: flex;
+    gap: 30px;
+}
+
+.menuNav a {
+    text-decoration: none;
+    color: white;
+}
+
+.layananWarga{
+    width: 189px;
+    height: 51px;
+    border-radius: 30px;;
+    border: 2px solid #EFB34A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/*Footer--------------------------------------------*/
+
+.footer{
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    background: #164941;
+}
+
+.isiFooter{
+    padding: 50px;
+}

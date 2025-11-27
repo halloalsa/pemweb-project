@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background-color: #EBE9DD;
+}
+
+/* bg utama */
+.login-bg {
+    min-height: 100vh;
+    background:
+        linear-gradient(180deg, #003631 0%, rgba(156, 200, 141, 0.6) 15%, rgba(255, 255, 255, 0.4) 100%),
+        url("../assets/admin/bg login admin.png");
+    background-size: cover;
+    background-position: center;
+}
+
+/* judul */
+.brand-title {
+    font-family: "Marcellus SC", serif;
+    font-size: 80px;
+    font-weight: 400;
+    color: #FFFFFF;
+    letter-spacing: 3px;
+    margin-top: 110px;
+}
+
+/* card */
+.login-card {
+    width: 1150px;
+    max-width: 100%;
+    border-radius: 60px;
+    overflow: hidden;
+    background-color: #EBE9DD;
+    box-shadow: 0px 0px 25px 10px #00000040;
+    margin-top: 50px;
+}
+
+/* card kiri */
+.login-left {
+    background:
+        url("../assets/admin/admin memantau.svg"),
+        linear-gradient(142deg, #338F13 10%, #FFF15C 47%, #9CC88D 75%);
+    
+    background-size: 100%, cover;    
+    background-position: bottom left, center;
+    background-repeat: no-repeat, no-repeat;
+    padding: 60px 55px 50px;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.title-hi {
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 1;
+    margin-top: -5px;  
+    margin-bottom: 10px; 
+    margin-left: 10px;
+}
+
+/* card kanan */
+.login-right {
+    padding: 80px 60px;
+    background-color: #F3EFDF;
+    border-radius: 0 60px 60px 0;
+}
+
+.login-right h2 {
+    font-size: 55px;
+    color: #4D774F;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.login-right p {
+    font-size: 24px;
+    color: #609B4C;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.login-right .form-label {
+    font-size: 30px; 
+    font-weight: 600;
+}
+
+.input-box {
+    height: 65px;
+    border-radius: 34px;
+    border: 2.5px solid #EFB34A;
+    font-size: 25px;
+    background-color: #F8F4E6;
+    padding: 12px 25px;
+}
+
+/* login */
+.btn-login {
+    width: 330px;
+    height: 80px;
+    background-color: #FFC765;
+    border: none;
+    border-radius: 40px;
+    font-size: 40px;
+    font-weight: 700;
+    color: #326334;
+    box-shadow: 0px 5px 15px #00000040;
+    display: block;
+    margin: 50px auto 0;
+}
+
+/* footer */
+.text-muted.small {
+    font-size: 20px;
+    color: #4D774F !important;
+}
+
+/* button kembali */
+.back-btn {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background-color: #FFC765;
+    border-radius: 34px;
+    padding: 12px 40px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #326334;
+    border: none;
+    box-shadow: 0px 0px 12px #00000050;
+    cursor: pointer;
+}
